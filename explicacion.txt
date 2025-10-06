@@ -1,0 +1,93 @@
+Explicacion de funciones de NumPy y Matplotlib utilizadas
+
+Este documento describe todas las funciones y metodos de NumPy y Matplotlib utilizados en el archivo procesamiento_datos.py, explicando que hace cada uno y por que se emplea en este tp.
+
+---
+
+1. NumPy (np)
+
+np.loadtxt(filename, delimiter, skiprows, unpack)
+- que hace: Carga datos desde un archivo de texto o CSV en arrays de NumPy.
+- Parametros utilizados:
+  - filename → nombre del archivo, ejemplo: ("aceite_5mm.csv")
+  - delimiter="," → separador de columnas
+  - skiprows=1 → omite la primera fila (cabecera)
+  - unpack=True → separa las columnas en variables independientes (t, h)
+- Por que se usa: Permite cargar de manera eficiente los datos experimentales de tiempo (t) y altura (h) en arrays para su posterior analisis y ajuste.
+
+h[0]
+- que hace: Accede al primer elemento del array h.
+- Por que se usa: Determina la altura inicial del liquido (h0) para normalizar los datos.
+
+y = h / h0
+- que hace: operacion elemento a elemento entre arrays.
+- Por que se usa: Normaliza la altura para obtener h(t)/h0, facilitando comparaciones entre experimentos o con modelos teoricos.
+
+np.polyfit(x, y, grado)
+- que hace: Ajusta un polinomio de grado "grado" a los datos x y y usando minimos cuadrados.
+- Por que se usa: Calcula los coeficientes de los polinomios cuadratico y cubico para aproximar los datos experimentales.
+
+np.polyval(coef, x)
+- que hace: Evalua un polinomio con coeficientes "coef" en los valores x.
+- Por que se usa: Calcula los valores ajustados del modelo polinomico para graficarlos y calcular errores.
+
+np.mean(array)
+- que hace: Calcula el promedio de los elementos de un array.
+- Por que se usa: Calcula el Error Cuadratico Medio (ECM) entre los datos experimentales y los valores ajustados.
+
+np.log(array)
+- que hace: Calcula el logaritmo natural elemento a elemento de un array.
+- Por que se usa: Se utiliza para linealizar el ajuste exponencial, que sigue la forma y = exp(a - b*t).
+
+mask = y > 0
+- que hace: Crea un array booleano que es True donde y es mayor a cero.
+- Por que se usa: Evita problemas al aplicar np.log() sobre valores no positivos.
+
+Operaciones elementales (y - y_quad, y / h0, (1 - t/tf)**2)
+- que hacen: Operaciones matematicas elemento a elemento sobre arrays.
+- Por que se usan: Permiten calcular errores y modelos teoricos de manera vectorizada y eficiente.
+
+---
+
+2. Matplotlib (plt)
+
+plt.figure(figsize=(ancho, alto))
+- que hace: Crea una nueva figura para graficar.
+- Parámetros utilizados: figsize=(8, 5) define el tamaño en pulgadas.
+- Por que se usa: Permite ajustar el tamaño del grafico para una presentacion clara.
+
+plt.plot(x, y, formato, label)
+- que hace: Grafica los datos y frente a x.
+- Parámetros utilizados:
+  - formato → define color y estilo ('xr' rojo con cruces, '-b' azul sólido, etc.)
+  - label → etiqueta de la curva para la leyenda
+- Por que se usa: Muestra los datos experimentales y los ajustes de manera visual.
+
+plt.xlabel("Texto") / plt.ylabel("Texto")
+- que hace: Etiqueta los ejes X e Y del grafico.
+- Por que se usa: Permite que el grafico sea entendible.
+
+plt.title("Texto")
+- que hace: Coloca un titulo en la grafico.
+- Por que se usa: Describe que se esta mostrando.
+
+plt.legend()
+- que hace: Muestra la leyenda con las etiquetas definidas en label.
+- Por que se usa: Identifica cada curva en el grafico.
+
+plt.grid(True)
+- que hace: Activa la cuadricula del grafico.
+- Por que se usa: Facilita la lectura visual de los datos.
+
+plt.tight_layout()
+- que hace: Ajusta automaticamente los margenes de la figura para que no se solapen etiquetas.
+- Por que se usa: Mejora la presentacion del grafico al guardarlo o mostrarlo.
+
+plt.savefig("archivo.png")
+- que hace: Guarda la figura actual en un archivo de imagen (PNG, PDF, etc.).
+- Por que se usa: Permite guardar el grafico generado para reportes o entregas.
+
+plt.show()
+- que hace: Muestra la figura en pantalla.
+- Por que se usa: Permite visualizar los resultados de manera interactiva durante la ejecucion del script.
+
