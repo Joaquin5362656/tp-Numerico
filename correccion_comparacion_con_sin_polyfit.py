@@ -6,8 +6,8 @@ Comparamos los coeficientes obtenidos usando la funcion Polifit de numpy
 con los coeficientes obtenidos por un algoritmo basado en el esquema de resolucion 
 del metodo lineal de cuadrados minimos expresado en forma matricial
 """
-nombre_archivo = "te_4mm.csv"  #CAMBIAR A CUALQUIER ARCHIVO DE Mediciones
-path_archivo = f"./Mediciones/{nombre_archivo}"
+nombre_archivo = "te_5mm.csv"  #CAMBIAR A CUALQUIER ARCHIVO DE Mediciones
+path_archivo = f"{nombre_archivo}"
 
 tiempos, alturas = np.loadtxt(path_archivo, delimiter=",", skiprows=1, unpack=True)
 
